@@ -29,7 +29,8 @@ namespace DemoTarget
         public string SanitizedNameWithId { get; set; }
 
         // to be formatteed based on email and email type
-        public string FormattedEmail { get; set; }
+        public string FormattedEmail { get; set; }
+
     }
 }
 
