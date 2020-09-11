@@ -43,10 +43,18 @@ namespace DemoTarget
                 IEnumerable<DemoSource.Account> accounts,
                 IEnumerable<string> emails)
         {
-            foreach (var group in groups)
-                foreach (var person in group.People)
-                    foreach (var email in person.Emails)
-                        yield return (accounts.Where(p => p.EmailAddress.Email == email.Email).FirstOrDefault(), person);
+
+            foreach (var email in emails)
+                foreach (var group in groups)
+                    foreach (var person in group.People)
+                        if (person.Emails.Any(p => p.Email == email))
+                            yield return (accounts.Where(p => p.EmailAddress.Email == email).FirstOrDefault(), person);
+
+            //Second solution, without considering "emails" collection
+            //foreach (var group in groups) 
+            //    foreach (var person in group.People)
+            //        foreach (var email in person.Emails)
+            //            yield return (accounts.Where(p => p.EmailAddress.Email == email.Email).FirstOrDefault(), person);
         }
     }
 }
